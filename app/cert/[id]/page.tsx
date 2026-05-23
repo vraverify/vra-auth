@@ -1,22 +1,27 @@
-import { createClient } from "@supabase/supabase-js"
+import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+);
 
-type Props = {
-  params: {
-    id: string
-  }
-}
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
 
-export default async function CertificatePage({ params }: Props) {
-  const { data } = await supabase
+  console.log("PARAM ID:", id);
+
+  const { data, error } = await supabase
     .from("certificates")
     .select("*")
-    .eq("certificate_id", params.id)
-    .single()
+    .eq("certificate_id", id)
+    .single();
+
+  console.log("DATA:", data);
+  console.log("ERROR:", error);
 
   if (!data) {
     return (
@@ -28,11 +33,12 @@ export default async function CertificatePage({ params }: Props) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          fontSize: "32px",
         }}
       >
         Certificate Not Found
       </main>
-    )
+    );
   }
 
   return (
@@ -48,9 +54,9 @@ export default async function CertificatePage({ params }: Props) {
 
       <h2>{data.certificate_id}</h2>
 
-      <p>{data.brand}</p>
+      <p>{data.model_name}</p>
 
-      <p>{data.model}</p>
+      <p>{data.size}</p>
     </main>
-  )
+  );
 }
