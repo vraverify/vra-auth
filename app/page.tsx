@@ -1,12 +1,9 @@
-export default function HomePage() {
+export default function CertPage() {
   return (
     <main className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-6xl font-bold mb-4">VRA VERIFY</h1>
-        <p className="text-zinc-400 text-lg">
-          Luxury Authentication Certificate System
-        </p>
-      </div>
+      <h1 className="text-4xl font-bold">
+        Certificate Page
+      </h1>
     </main>
-  );
+  )
 }
