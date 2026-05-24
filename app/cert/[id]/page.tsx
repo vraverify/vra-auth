@@ -13,13 +13,13 @@ export default async function CertificatePage({
 }) {
   const { id } = await params;
 
-  const { data: cert } = await supabase
+  const { data: cert, error } = await supabase
     .from("certificates")
     .select("*")
     .eq("cert_number", id)
     .single();
 
-  if (!cert) {
+  if (error || !cert) {
     return (
       <main className="min-h-screen bg-black text-white flex items-center justify-center">
         <h1 className="text-4xl font-bold">Certificate Not Found</h1>
@@ -33,17 +33,25 @@ export default async function CertificatePage({
 
         {/* PRODUCT IMAGE */}
         <div className="relative w-full h-[420px] bg-black">
-          <Image
-            src={cert.image_url}
-            alt={cert.model_name}
-            fill
-            className="object-cover"
-          />
+
+          {cert.image_url ? (
+            <Image
+              src={cert.image_url}
+              alt={cert.model_name || "Product"}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-zinc-500">
+              No Image
+            </div>
+          )}
 
           {/* VERIFIED BADGE */}
           <div className="absolute top-6 right-6 bg-white text-black px-5 py-2 rounded-full text-sm font-semibold tracking-wide">
             VERIFIED
           </div>
+
         </div>
 
         {/* CONTENT */}
@@ -54,7 +62,7 @@ export default async function CertificatePage({
           </p>
 
           <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-10">
-            {cert.model_name}
+            {cert.model_name || "Unknown Product"}
           </h1>
 
           {/* METADATA */}
@@ -65,7 +73,7 @@ export default async function CertificatePage({
                 BRAND
               </p>
               <p className="text-xl font-semibold">
-                {cert.brand}
+                {cert.brand || "-"}
               </p>
             </div>
 
@@ -74,7 +82,7 @@ export default async function CertificatePage({
                 SIZE
               </p>
               <p className="text-xl font-semibold">
-                {cert.size}
+                {cert.size || "-"}
               </p>
             </div>
 
@@ -83,7 +91,7 @@ export default async function CertificatePage({
                 CONDITION
               </p>
               <p className="text-xl font-semibold">
-                {cert.condition}
+                {cert.condition || "-"}
               </p>
             </div>
 
@@ -92,7 +100,7 @@ export default async function CertificatePage({
                 VERIFIED
               </p>
               <p className="text-xl font-semibold">
-                {cert.verified_at}
+                {cert.verified_at || "-"}
               </p>
             </div>
 
@@ -120,7 +128,7 @@ export default async function CertificatePage({
               </p>
 
               <p className="font-semibold">
-                {cert.inspector}
+                {cert.inspector || "VRA VERIFY"}
               </p>
             </div>
 
