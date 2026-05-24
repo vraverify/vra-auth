@@ -1,6 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
-import QRCode from "qrcode";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -13,11 +12,6 @@ export default async function CertificatePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-
-  // QR จะยิงเข้า verify page
-  const verifyUrl = `https://vraverify.com/verify/${id}`;
-
-  const qrCode = await QRCode.toDataURL(verifyUrl);
 
   const { data: cert, error } = await supabase
     .from("certificates")
@@ -80,6 +74,7 @@ export default async function CertificatePage({
               <p className="text-zinc-500 mb-2 text-sm">
                 BRAND
               </p>
+
               <p className="text-xl font-semibold">
                 {cert.brand || "-"}
               </p>
@@ -89,6 +84,7 @@ export default async function CertificatePage({
               <p className="text-zinc-500 mb-2 text-sm">
                 SIZE
               </p>
+
               <p className="text-xl font-semibold">
                 {cert.size || "-"}
               </p>
@@ -98,6 +94,7 @@ export default async function CertificatePage({
               <p className="text-zinc-500 mb-2 text-sm">
                 CONDITION
               </p>
+
               <p className="text-xl font-semibold">
                 {cert.condition || "-"}
               </p>
@@ -107,6 +104,7 @@ export default async function CertificatePage({
               <p className="text-zinc-500 mb-2 text-sm">
                 VERIFIED
               </p>
+
               <p className="text-xl font-semibold">
                 {cert.verified_at || "-"}
               </p>
@@ -123,23 +121,6 @@ export default async function CertificatePage({
 
             <p className="text-2xl md:text-3xl font-bold">
               {cert.certificate_id}
-            </p>
-
-          </div>
-
-          {/* QR VERIFY */}
-          <div className="mt-14 flex flex-col items-center">
-
-            <div className="bg-white p-4 rounded-3xl">
-              <img
-                src={qrCode}
-                alt="QR Code"
-                className="w-44 h-44"
-              />
-            </div>
-
-            <p className="text-zinc-500 text-sm mt-5 tracking-[0.2em]">
-              SCAN TO VERIFY
             </p>
 
           </div>
