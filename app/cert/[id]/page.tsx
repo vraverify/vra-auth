@@ -9,12 +9,14 @@ const supabase = createClient(
 export default async function CertificatePage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
+
   const { data: cert } = await supabase
     .from("certificates")
     .select("*")
-    .eq("cert_number", params.id)
+    .eq("cert_number", id)
     .single();
 
   if (!cert) {
