@@ -14,7 +14,8 @@ export default async function CertificatePage({
 }) {
   const { id } = await params;
 
-  const verifyUrl = `https://vraverify.com/cert/${id}`;
+  // QR จะยิงเข้า verify page
+  const verifyUrl = `https://vraverify.com/verify/${id}`;
 
   const qrCode = await QRCode.toDataURL(verifyUrl);
 
