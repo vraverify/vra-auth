@@ -29,7 +29,7 @@ export default async function CertificatePage({
     <main className="min-h-screen bg-black text-white px-6 py-20 flex items-center justify-center">
       <div className="w-full max-w-5xl bg-zinc-950 border border-zinc-800 rounded-[40px] overflow-hidden shadow-2xl">
 
-        {/* IMAGE */}
+        {/* PRODUCT IMAGE */}
         <div className="relative w-full h-[420px] bg-black">
           <Image
             src={cert.image_url}
@@ -51,25 +51,61 @@ export default async function CertificatePage({
             VRA CERTIFICATE
           </p>
 
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-10">
             {cert.model_name}
           </h1>
 
-          <div className="grid md:grid-cols-2 gap-8 text-zinc-300">
+          {/* METADATA */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-zinc-300">
 
             <div>
-              <p className="text-zinc-500 mb-2">Certificate Number</p>
-              <p className="text-2xl font-semibold">
-                {cert.cert_number}
+              <p className="text-zinc-500 mb-2 text-sm">
+                BRAND
+              </p>
+              <p className="text-xl font-semibold">
+                {cert.brand}
               </p>
             </div>
 
             <div>
-              <p className="text-zinc-500 mb-2">Size</p>
-              <p className="text-2xl font-semibold">
+              <p className="text-zinc-500 mb-2 text-sm">
+                SIZE
+              </p>
+              <p className="text-xl font-semibold">
                 {cert.size}
               </p>
             </div>
+
+            <div>
+              <p className="text-zinc-500 mb-2 text-sm">
+                CONDITION
+              </p>
+              <p className="text-xl font-semibold">
+                {cert.condition}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-zinc-500 mb-2 text-sm">
+                VERIFIED
+              </p>
+              <p className="text-xl font-semibold">
+                {cert.verified_at}
+              </p>
+            </div>
+
+          </div>
+
+          {/* CERT NUMBER */}
+          <div className="mt-14 p-6 border border-zinc-800 rounded-3xl bg-black">
+
+            <p className="text-zinc-500 text-sm mb-2 tracking-[0.2em]">
+              CERTIFICATE NUMBER
+            </p>
+
+            <p className="text-2xl md:text-3xl font-bold">
+              {cert.cert_number}
+            </p>
 
           </div>
 
@@ -80,8 +116,9 @@ export default async function CertificatePage({
               <p className="text-zinc-500 text-sm">
                 VERIFIED BY
               </p>
+
               <p className="font-semibold">
-                VRA VERIFY
+                {cert.inspector}
               </p>
             </div>
 
@@ -89,6 +126,7 @@ export default async function CertificatePage({
               <p className="text-zinc-500 text-sm">
                 STATUS
               </p>
+
               <p className="text-green-400 font-semibold">
                 AUTHENTIC
               </p>
