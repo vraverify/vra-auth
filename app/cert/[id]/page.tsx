@@ -29,6 +29,14 @@ export default async function CertificatePage({
     );
   }
 
+  // SAFE IMAGE ARRAY
+  const images =
+    Array.isArray(cert.images) && cert.images.length > 0
+      ? cert.images
+      : cert.image_url
+      ? [cert.image_url]
+      : [];
+
   return (
     <main className="min-h-screen bg-black text-white px-4 md:px-6 py-10 md:py-20 flex items-center justify-center">
 
@@ -37,7 +45,7 @@ export default async function CertificatePage({
         {/* IMAGE GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-3 bg-black">
 
-          {cert.images?.map((image: string, index: number) => (
+          {images.map((image: string, index: number) => (
             <div
               key={index}
               className="relative w-full h-[320px] md:h-[420px] rounded-3xl overflow-hidden"
