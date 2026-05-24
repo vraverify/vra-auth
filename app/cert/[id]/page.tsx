@@ -16,13 +16,15 @@ export default async function CertificatePage({
   const { data: cert, error } = await supabase
     .from("certificates")
     .select("*")
-    .eq("cert_number", id)
+    .eq("certificate_id", id)
     .single();
 
   if (error || !cert) {
     return (
       <main className="min-h-screen bg-black text-white flex items-center justify-center">
-        <h1 className="text-4xl font-bold">Certificate Not Found</h1>
+        <h1 className="text-4xl font-bold">
+          Certificate Not Found
+        </h1>
       </main>
     );
   }
@@ -106,15 +108,15 @@ export default async function CertificatePage({
 
           </div>
 
-          {/* CERT NUMBER */}
+          {/* CERTIFICATE ID */}
           <div className="mt-14 p-6 border border-zinc-800 rounded-3xl bg-black">
 
             <p className="text-zinc-500 text-sm mb-2 tracking-[0.2em]">
-              CERTIFICATE NUMBER
+              CERTIFICATE ID
             </p>
 
             <p className="text-2xl md:text-3xl font-bold">
-              {cert.cert_number}
+              {cert.certificate_id}
             </p>
 
           </div>
