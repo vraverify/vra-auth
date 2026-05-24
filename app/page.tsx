@@ -6,13 +6,13 @@ export default function HomePage() {
       <div className="text-center max-w-7xl">
 
         {/* LOGO */}
-        <div className="flex justify-center -mb-20">
+        <div className="flex justify-center mb-10">
           <Image
             src="/logo.png"
             alt="VRA Logo"
             width={420}
             height={420}
-            className="object-contain opacity-95 w-[420px]"
+            className="object-contain opacity-95 w-[220px] md:w-[420px]"
             priority
           />
         </div>
