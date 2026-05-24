@@ -62,7 +62,7 @@ export default function AdminPage() {
       .insert([
         {
           ...form,
-          images: uploadedImages,
+          images: JSON.parse(JSON.stringify(uploadedImages)),
           image_url: uploadedImages[0] || "",
         },
       ]);
@@ -179,6 +179,10 @@ export default function AdminPage() {
               setFiles(Array.from(e.target.files || []))
             }
           />
+
+          <p className="text-zinc-500 text-sm">
+            {files.length} files selected
+          </p>
 
           <button
             onClick={createCertificate}
