@@ -10,16 +10,14 @@ export default function HomePage() {
           <Image
             src="/logo.png"
             alt="VRA Logo"
-            width={260}
-            height={260}
+            width={560}
+            height={560}
             className="object-contain opacity-95"
           />
         </div>
 
         {/* BRAND */}
-        <p className="tracking-[0.6em] text-zinc-500 mb-10 text-lg">
-          VRA VERIFY
-        </p>
+    
 
         {/* TITLE */}
         <h1 className="text-7xl md:text-[140px] font-bold leading-[0.9] tracking-tight">
