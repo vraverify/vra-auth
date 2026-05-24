@@ -5,58 +5,63 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-export default async function Page({
+export default async function CertificatePage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
-  const { id } = await params;
-
-  console.log("PARAM ID:", id);
-
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("certificates")
     .select("*")
-    .eq("certificate_id", id)
+    .eq("cert_number", params.id)
     .single();
-
-  console.log("DATA:", data);
-  console.log("ERROR:", error);
 
   if (!data) {
     return (
-      <main
-        style={{
-          minHeight: "100vh",
-          background: "black",
-          color: "white",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "32px",
-        }}
-      >
-        Certificate Not Found
+      <main className="min-h-screen bg-black text-white flex items-center justify-center">
+        <h1 className="text-3xl font-bold">Certificate Not Found</h1>
       </main>
     );
   }
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "black",
-        color: "white",
-        padding: "40px",
-      }}
-    >
-      <h1>VRA VERIFY</h1>
+    <main className="min-h-screen bg-black text-white flex items-center justify-center px-6">
+      <div className="max-w-2xl w-full border border-zinc-800 bg-zinc-950 rounded-3xl p-10 shadow-2xl">
+        <div className="space-y-6">
+          <div>
+            <p className="text-zinc-500 text-sm tracking-[0.3em]">
+              VRA VERIFY
+            </p>
 
-      <h2>{data.certificate_id}</h2>
+            <h1 className="text-5xl font-bold mt-2">
+              {data.cert_number}
+            </h1>
+          </div>
 
-      <p>{data.model_name}</p>
+          <div className="border-t border-zinc-800 pt-6 space-y-4">
+            <div>
+              <p className="text-zinc-500 text-sm">Model</p>
+              <p className="text-2xl font-semibold">
+                {data.model_name}
+              </p>
+            </div>
 
-      <p>{data.size}</p>
+            <div>
+              <p className="text-zinc-500 text-sm">Size</p>
+              <p className="text-xl">{data.size}</p>
+            </div>
+
+            <div>
+              <p className="text-zinc-500 text-sm">Authentication Status</p>
+
+              <div className="inline-flex items-center gap-2 mt-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-full">
+                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                Verified Authentic
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }

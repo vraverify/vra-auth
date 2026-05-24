@@ -1,33 +1,52 @@
-import Link from "next/link";
+import Image from "next/image";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen flex items-center justify-center px-6">
+    <main className="min-h-screen bg-black text-white flex items-center justify-center px-6">
+      <div className="text-center max-w-5xl">
 
-      <div className="text-center max-w-2xl">
+        {/* LOGO */}
+        <div className="flex justify-center mb-8">
+          <Image
+            src="/logo.png"
+            alt="VRA Logo"
+            width={90}
+            height={90}
+            className="object-contain opacity-90"
+          />
+        </div>
 
-        <p className="tracking-[0.4em] text-white/40 text-sm mb-4">
+        {/* BRAND */}
+        <p className="tracking-[0.5em] text-zinc-500 mb-6 text-sm">
           VRA VERIFY
         </p>
 
-        <h1 className="text-7xl font-semibold leading-none mb-6">
-          Luxury Authentication Infrastructure
+        {/* TITLE */}
+        <h1 className="text-6xl md:text-8xl font-bold leading-none tracking-tight">
+          Luxury
+          <br />
+          Authentication
+          <br />
+          Infrastructure
         </h1>
 
-        <p className="text-white/50 text-lg mb-10">
+        {/* SUBTEXT */}
+        <p className="text-zinc-500 text-lg mt-10 max-w-3xl mx-auto">
           Premium verification system for rare sneakers,
           luxury fashion, and collectible assets.
         </p>
 
-        <Link
-          href="/cert/UL-2026-000001"
-          className="bg-white text-black px-8 py-4 rounded-full text-lg font-medium"
-        >
-          View Certificate
-        </Link>
+        {/* BUTTON */}
+        <div className="mt-14">
+          <a
+            href="/cert/UL-2026-000001"
+            className="bg-white text-black px-10 py-5 rounded-full text-xl font-semibold hover:scale-105 transition"
+          >
+            View Certificate
+          </a>
+        </div>
 
       </div>
-
     </main>
   );
 }
