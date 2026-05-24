@@ -19,17 +19,19 @@ export default async function VerifyPage({
 
         </div>
 
-        {/* STATUS */}
+        {/* LABEL */}
         <p className="tracking-[0.4em] text-zinc-500 text-sm mb-6">
           VRA VERIFY SYSTEM
         </p>
 
+        {/* TITLE */}
         <h1 className="text-6xl md:text-7xl font-bold leading-none mb-8">
           Authenticity
           <br />
           Confirmed
         </h1>
 
+        {/* DESCRIPTION */}
         <p className="text-zinc-500 text-lg mb-12">
           This item has been successfully verified
           by VRA VERIFY authentication infrastructure.
