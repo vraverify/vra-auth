@@ -30,82 +30,91 @@ export default async function CertificatePage({
   }
 
   return (
-    <main className="min-h-screen bg-black text-white px-6 py-20 flex items-center justify-center">
-      <div className="w-full max-w-5xl bg-zinc-950 border border-zinc-800 rounded-[40px] overflow-hidden shadow-2xl">
+    <main className="min-h-screen bg-black text-white px-4 md:px-6 py-10 md:py-20 flex items-center justify-center">
 
-        {/* PRODUCT IMAGE */}
-        <div className="relative w-full h-[420px] bg-black">
+      <div className="w-full max-w-5xl bg-zinc-950 border border-zinc-800 rounded-[32px] overflow-hidden shadow-2xl">
 
-          {cert.image_url ? (
-            <Image
-              src={cert.image_url}
-              alt={cert.model_name || "Product"}
-              fill
-              className="object-cover"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-zinc-500">
-              No Image
+        {/* IMAGE GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-3 bg-black">
+
+          {cert.images?.map((image: string, index: number) => (
+            <div
+              key={index}
+              className="relative w-full h-[320px] md:h-[420px] rounded-3xl overflow-hidden"
+            >
+
+              <Image
+                src={image}
+                alt={`Product Image ${index + 1}`}
+                fill
+                className="object-cover"
+              />
+
             </div>
-          )}
-
-          {/* VERIFIED BADGE */}
-          <div className="absolute top-6 right-6 bg-white text-black px-5 py-2 rounded-full text-sm font-semibold tracking-wide">
-            VERIFIED
-          </div>
+          ))}
 
         </div>
 
         {/* CONTENT */}
-        <div className="p-10 md:p-14">
+        <div className="p-6 md:p-14">
 
-          <p className="text-zinc-500 tracking-[0.3em] text-sm mb-4">
-            VRA CERTIFICATE
-          </p>
+          {/* HEADER */}
+          <div className="flex items-center justify-between mb-6">
 
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-10">
+            <p className="text-zinc-500 tracking-[0.3em] text-xs md:text-sm">
+              VRA CERTIFICATE
+            </p>
+
+            <div className="bg-white text-black px-4 py-2 rounded-full text-xs md:text-sm font-semibold tracking-wide">
+              VERIFIED
+            </div>
+
+          </div>
+
+          {/* TITLE */}
+          <h1 className="text-3xl md:text-6xl font-bold leading-tight mb-10">
             {cert.model_name || "Unknown Product"}
           </h1>
 
           {/* METADATA */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-zinc-300">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-zinc-300">
 
             <div>
-              <p className="text-zinc-500 mb-2 text-sm">
+              <p className="text-zinc-500 mb-2 text-xs md:text-sm">
                 BRAND
               </p>
 
-              <p className="text-xl font-semibold">
+              <p className="text-lg md:text-xl font-semibold">
                 {cert.brand || "-"}
               </p>
             </div>
 
             <div>
-              <p className="text-zinc-500 mb-2 text-sm">
+              <p className="text-zinc-500 mb-2 text-xs md:text-sm">
                 SIZE
               </p>
 
-              <p className="text-xl font-semibold">
+              <p className="text-lg md:text-xl font-semibold">
                 {cert.size || "-"}
               </p>
             </div>
 
             <div>
-              <p className="text-zinc-500 mb-2 text-sm">
+              <p className="text-zinc-500 mb-2 text-xs md:text-sm">
                 CONDITION
               </p>
 
-              <p className="text-xl font-semibold">
+              <p className="text-lg md:text-xl font-semibold">
                 {cert.condition || "-"}
               </p>
             </div>
 
             <div>
-              <p className="text-zinc-500 mb-2 text-sm">
+              <p className="text-zinc-500 mb-2 text-xs md:text-sm">
                 VERIFIED
               </p>
 
-              <p className="text-xl font-semibold">
+              <p className="text-lg md:text-xl font-semibold">
                 {cert.verified_at || "-"}
               </p>
             </div>
@@ -113,37 +122,37 @@ export default async function CertificatePage({
           </div>
 
           {/* CERTIFICATE ID */}
-          <div className="mt-14 p-6 border border-zinc-800 rounded-3xl bg-black">
+          <div className="mt-12 p-6 border border-zinc-800 rounded-3xl bg-black">
 
-            <p className="text-zinc-500 text-sm mb-2 tracking-[0.2em]">
+            <p className="text-zinc-500 text-xs md:text-sm mb-2 tracking-[0.2em]">
               CERTIFICATE ID
             </p>
 
-            <p className="text-2xl md:text-3xl font-bold">
+            <p className="text-2xl md:text-3xl font-bold break-all">
               {cert.certificate_id}
             </p>
 
           </div>
 
           {/* FOOTER */}
-          <div className="mt-14 pt-8 border-t border-zinc-800 flex items-center justify-between">
+          <div className="mt-12 pt-8 border-t border-zinc-800 flex items-center justify-between">
 
             <div>
-              <p className="text-zinc-500 text-sm">
+              <p className="text-zinc-500 text-xs md:text-sm">
                 VERIFIED BY
               </p>
 
-              <p className="font-semibold">
+              <p className="font-semibold text-sm md:text-base">
                 {cert.inspector || "VRA VERIFY"}
               </p>
             </div>
 
             <div className="text-right">
-              <p className="text-zinc-500 text-sm">
+              <p className="text-zinc-500 text-xs md:text-sm">
                 STATUS
               </p>
 
-              <p className="text-green-400 font-semibold">
+              <p className="text-green-400 font-semibold text-sm md:text-base">
                 AUTHENTIC
               </p>
             </div>
@@ -151,7 +160,9 @@ export default async function CertificatePage({
           </div>
 
         </div>
+
       </div>
+
     </main>
   );
 }
