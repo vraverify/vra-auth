@@ -62,7 +62,7 @@ export default function AdminPage() {
       .insert([
         {
           ...form,
-          images: JSON.parse(JSON.stringify(uploadedImages)),
+          images: uploadedImages,
           image_url: uploadedImages[0] || "",
         },
       ]);
@@ -170,7 +170,6 @@ export default function AdminPage() {
             }
           />
 
-          {/* MULTIPLE IMAGE UPLOAD */}
           <input
             type="file"
             multiple
