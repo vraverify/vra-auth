@@ -48,7 +48,7 @@ export default async function CertificatePage({
           {images.map((image: string, index: number) => (
             <div
               key={index}
-              className="relative w-full h-[320px] md:h-[420px] rounded-3xl overflow-hidden"
+              className="relative aspect-square w-full rounded-3xl overflow-hidden bg-zinc-900"
             >
 
               <Image
