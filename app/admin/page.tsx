@@ -14,6 +14,8 @@ export default function AdminPage() {
 
   const [files, setFiles] = useState<File[]>([]);
 
+  const [deleteId, setDeleteId] = useState("");
+
   const [form, setForm] = useState({
     certificate_id: "",
     model_name: "",
@@ -82,6 +84,53 @@ export default function AdminPage() {
     );
   }
 
+  async function deleteCertificate() {
+
+    if (!deleteId) {
+      alert("Enter Certificate ID");
+      return;
+    }
+
+    const confirmDelete = confirm(
+      `Delete certificate ${deleteId}?`
+    );
+
+    if (!confirmDelete) return;
+
+    setLoading(true);
+
+    // DELETE STORAGE FILES
+    const { data: storageFiles } = await supabase.storage
+      .from("certificate-images")
+      .list(deleteId);
+
+    if (storageFiles && storageFiles.length > 0) {
+
+      const filePaths = storageFiles.map(
+        (file) => `${deleteId}/${file.name}`
+      );
+
+      await supabase.storage
+        .from("certificate-images")
+        .remove(filePaths);
+    }
+
+    // DELETE DATABASE ROW
+    const { error } = await supabase
+      .from("certificates")
+      .delete()
+      .eq("certificate_id", deleteId);
+
+    setLoading(false);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    alert("Certificate Deleted");
+  }
+
   return (
     <main className="min-h-screen bg-black text-white px-6 py-20">
 
@@ -91,6 +140,7 @@ export default function AdminPage() {
           VRA ADMIN
         </h1>
 
+        {/* CREATE */}
         <div className="space-y-6">
 
           <input
@@ -190,6 +240,36 @@ export default function AdminPage() {
           >
             {loading ? "Creating..." : "Create Certificate"}
           </button>
+
+        </div>
+
+        {/* DELETE */}
+        <div className="mt-20 border-t border-zinc-800 pt-12">
+
+          <h2 className="text-2xl font-bold mb-6 text-red-500">
+            Delete Certificate
+          </h2>
+
+          <div className="space-y-4">
+
+            <input
+              placeholder="Certificate ID"
+              value={deleteId}
+              onChange={(e) =>
+                setDeleteId(e.target.value)
+              }
+              className="w-full bg-zinc-900 border border-red-900 rounded-2xl px-6 py-5"
+            />
+
+            <button
+              onClick={deleteCertificate}
+              disabled={loading}
+              className="w-full bg-red-600 text-white rounded-2xl py-5 text-xl font-semibold"
+            >
+              Delete Certificate
+            </button>
+
+          </div>
 
         </div>
 
