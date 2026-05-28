@@ -16,6 +16,8 @@ export default function AdminPage() {
 
   const [deleteId, setDeleteId] = useState("");
 
+  const [searchId, setSearchId] = useState("");
+
   const [form, setForm] = useState({
     certificate_id: "",
     model_name: "",
@@ -130,6 +132,7 @@ export default function AdminPage() {
 
     setLoading(true);
 
+    // DELETE STORAGE FILES
     const { data: storageFiles } = await supabase.storage
       .from("certificate-images")
       .list(deleteId);
@@ -145,6 +148,7 @@ export default function AdminPage() {
         .remove(filePaths);
     }
 
+    // DELETE DATABASE ROW
     const { error } = await supabase
       .from("certificates")
       .delete()
@@ -160,6 +164,19 @@ export default function AdminPage() {
     alert("Certificate Deleted");
   }
 
+  function openCertificate() {
+
+    if (!searchId) {
+      alert("Enter Certificate ID");
+      return;
+    }
+
+    window.open(
+      `/cert/${searchId}`,
+      "_blank"
+    );
+  }
+
   return (
     <main className="min-h-screen bg-black text-white px-6 py-20">
 
@@ -168,6 +185,35 @@ export default function AdminPage() {
         <h1 className="text-5xl font-bold mb-14">
           VRA ADMIN
         </h1>
+
+        {/* SEARCH */}
+        <div className="mb-16 border border-zinc-800 rounded-3xl p-6 bg-zinc-950">
+
+          <h2 className="text-2xl font-bold mb-6">
+            Search Certificate
+          </h2>
+
+          <div className="space-y-4">
+
+            <input
+              placeholder="Certificate ID"
+              value={searchId}
+              onChange={(e) =>
+                setSearchId(e.target.value)
+              }
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-6 py-5"
+            />
+
+            <button
+              onClick={openCertificate}
+              className="w-full bg-blue-600 text-white rounded-2xl py-5 text-xl font-semibold"
+            >
+              Open Certificate
+            </button>
+
+          </div>
+
+        </div>
 
         {/* CREATE */}
         <div className="space-y-6">
