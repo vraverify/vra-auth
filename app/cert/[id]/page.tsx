@@ -160,9 +160,17 @@ export default async function CertificatePage({
                 STATUS
               </p>
 
-              <p className="text-green-400 font-semibold text-sm md:text-base">
-                AUTHENTIC
-              </p>
+              <span
+                className={
+                  cert.status === "AUTHENTIC"
+                    ? "text-green-400 font-semibold text-sm md:text-base"
+                    : cert.status === "FAKE"
+                    ? "text-red-500 font-semibold text-sm md:text-base"
+                    : "text-yellow-400 font-semibold text-sm md:text-base"
+                }
+              >
+                {cert.status || "UNVERIFIED"}
+              </span>
             </div>
 
           </div>

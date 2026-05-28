@@ -26,6 +26,7 @@ export default function AdminPage() {
     condition: "",
     verified_at: "",
     inspector: "",
+    status: "",
   });
 
   // AUTO GENERATE ID
@@ -113,7 +114,6 @@ export default function AdminPage() {
       "_blank"
     );
 
-    // GENERATE NEXT ID
     generateCertificateId();
   }
 
@@ -132,7 +132,6 @@ export default function AdminPage() {
 
     setLoading(true);
 
-    // DELETE STORAGE FILES
     const { data: storageFiles } = await supabase.storage
       .from("certificate-images")
       .list(deleteId);
@@ -148,7 +147,6 @@ export default function AdminPage() {
         .remove(filePaths);
     }
 
-    // DELETE DATABASE ROW
     const { error } = await supabase
       .from("certificates")
       .delete()
@@ -267,6 +265,34 @@ export default function AdminPage() {
               })
             }
           />
+
+          <select
+            className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-6 py-5"
+            onChange={(e) =>
+              setForm({
+                ...form,
+                status: e.target.value,
+              })
+            }
+          >
+
+            <option value="">
+              Select Status
+            </option>
+
+            <option value="AUTHENTIC">
+              AUTHENTIC
+            </option>
+
+            <option value="FAKE">
+              FAKE
+            </option>
+
+            <option value="UNVERIFIED">
+              UNVERIFIED
+            </option>
+
+          </select>
 
           <input
             placeholder="Verified Date"
