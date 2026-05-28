@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
@@ -26,13 +26,41 @@ export default function AdminPage() {
     inspector: "",
   });
 
+  // AUTO GENERATE ID
+  useEffect(() => {
+    generateCertificateId();
+  }, []);
+
+  async function generateCertificateId() {
+
+    const year = new Date().getFullYear();
+
+    const { count } = await supabase
+      .from("certificates")
+      .select("*", {
+        count: "exact",
+        head: true,
+      });
+
+    const nextNumber = String((count || 0) + 1).padStart(6, "0");
+
+    const generatedId =
+      `VRA-SNK-${year}-${nextNumber}`;
+
+    setForm((prev) => ({
+      ...prev,
+      certificate_id: generatedId,
+    }));
+  }
+
   async function uploadImages() {
 
     const uploadedUrls: string[] = [];
 
     for (const file of files) {
 
-      const filePath = `${form.certificate_id}/${Date.now()}-${file.name}`;
+      const filePath =
+        `${form.certificate_id}/${Date.now()}-${file.name}`;
 
       const { error } = await supabase.storage
         .from("certificate-images")
@@ -82,6 +110,9 @@ export default function AdminPage() {
       `/cert/${form.certificate_id}`,
       "_blank"
     );
+
+    // GENERATE NEXT ID
+    generateCertificateId();
   }
 
   async function deleteCertificate() {
@@ -99,7 +130,6 @@ export default function AdminPage() {
 
     setLoading(true);
 
-    // DELETE STORAGE FILES
     const { data: storageFiles } = await supabase.storage
       .from("certificate-images")
       .list(deleteId);
@@ -115,7 +145,6 @@ export default function AdminPage() {
         .remove(filePaths);
     }
 
-    // DELETE DATABASE ROW
     const { error } = await supabase
       .from("certificates")
       .delete()
@@ -144,14 +173,9 @@ export default function AdminPage() {
         <div className="space-y-6">
 
           <input
-            placeholder="Certificate ID"
-            className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-6 py-5"
-            onChange={(e) =>
-              setForm({
-                ...form,
-                certificate_id: e.target.value,
-              })
-            }
+            value={form.certificate_id}
+            readOnly
+            className="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-5 text-zinc-300"
           />
 
           <input
