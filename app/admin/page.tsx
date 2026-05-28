@@ -27,9 +27,9 @@ export default function AdminPage() {
     verified_at: "",
     inspector: "",
     status: "",
+    notes: "",
   });
 
-  // AUTO GENERATE ID
   useEffect(() => {
     generateCertificateId();
   }, []);
@@ -293,6 +293,18 @@ export default function AdminPage() {
             </option>
 
           </select>
+
+          <textarea
+            placeholder="Authentication Notes"
+            rows={6}
+            className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-6 py-5"
+            onChange={(e) =>
+              setForm({
+                ...form,
+                notes: e.target.value,
+              })
+            }
+          />
 
           <input
             placeholder="Verified Date"

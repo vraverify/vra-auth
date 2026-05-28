@@ -29,7 +29,6 @@ export default async function CertificatePage({
     );
   }
 
-  // SAFE IMAGE ARRAY
   const images =
     Array.isArray(cert.images) && cert.images.length > 0
       ? cert.images
@@ -129,6 +128,21 @@ export default async function CertificatePage({
 
           </div>
 
+          {/* NOTES */}
+          {cert.notes && (
+            <div className="mt-12 p-6 border border-zinc-800 rounded-3xl bg-black">
+
+              <p className="text-zinc-500 text-xs md:text-sm mb-4 tracking-[0.2em]">
+                AUTHENTICATION NOTES
+              </p>
+
+              <p className="text-zinc-300 leading-relaxed whitespace-pre-wrap">
+                {cert.notes}
+              </p>
+
+            </div>
+          )}
+
           {/* CERTIFICATE ID */}
           <div className="mt-12 p-6 border border-zinc-800 rounded-3xl bg-black">
 
@@ -171,6 +185,7 @@ export default async function CertificatePage({
               >
                 {cert.status || "UNVERIFIED"}
               </span>
+
             </div>
 
           </div>
