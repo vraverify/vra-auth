@@ -41,27 +41,6 @@ export default async function CertificatePage({
 
       <div className="w-full max-w-5xl bg-zinc-950 border border-zinc-800 rounded-[32px] overflow-hidden shadow-2xl">
 
-        {/* IMAGE GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-3 bg-black">
-
-          {images.map((image: string, index: number) => (
-            <div
-              key={index}
-              className="relative aspect-square w-full rounded-3xl overflow-hidden bg-zinc-900"
-            >
-
-              <Image
-                src={image}
-                alt={`Product Image ${index + 1}`}
-                fill
-                className="object-cover"
-              />
-
-            </div>
-          ))}
-
-        </div>
-
         {/* CONTENT */}
         <div className="p-6 md:p-14">
 
@@ -183,12 +162,37 @@ export default async function CertificatePage({
                     : "text-yellow-400 font-semibold text-sm md:text-base"
                 }
               >
-                {cert.status || "UNVERIFIED"}
+                {cert.status === "AUTHENTIC"
+                  ? "PASS"
+                  : cert.status === "FAKE"
+                  ? "NOT PASS"
+                  : "UNVERIFIED"}
               </span>
 
             </div>
 
           </div>
+
+        </div>
+
+        {/* IMAGE GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-3 bg-black">
+
+          {images.map((image: string, index: number) => (
+            <div
+              key={index}
+              className="relative aspect-square w-full rounded-3xl overflow-hidden bg-zinc-900"
+            >
+
+              <Image
+                src={image}
+                alt={`Product Image ${index + 1}`}
+                fill
+                className="object-cover"
+              />
+
+            </div>
+          ))}
 
         </div>
 
