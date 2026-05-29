@@ -18,13 +18,13 @@ export default function HomePage() {
         </div>
 
         {/* TITLE */}
-        <h1 className="text-7xl md:text-[140px] font-bold leading-[0.9] tracking-tight">
-          Luxury
-          <br />
-          Authentication
-          <br />
-          Infrastructure
-        </h1>
+        <h1 className="text-4xl md:text-[140px] font-bold leading-[0.9] tracking-tight text-center">
+  Luxury
+  <br />
+  Authentication
+  <br />
+  Infrastructure
+</h1>
 
         {/* BUTTON */}
         <div className="mt-16">
