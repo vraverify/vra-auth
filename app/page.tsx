@@ -19,22 +19,12 @@ export default function HomePage() {
 
         {/* TITLE */}
         <h1 className="text-4xl md:text-[140px] font-bold leading-[0.9] tracking-tight text-center">
-  Luxury
-  <br />
-  Authentication
-  <br />
-  Infrastructure
-</h1>
-
-        {/* BUTTON */}
-        <div className="mt-16">
-          <a
-            href="/cert/UL-2026-000001"
-            className="bg-white text-black px-10 py-5 rounded-full text-xl font-semibold hover:scale-105 transition duration-300"
-          >
-            View Certificate
-          </a>
-        </div>
+          Luxury
+          <br />
+          Authentication
+          <br />
+          Infrastructure
+        </h1>
 
       </div>
     </main>
