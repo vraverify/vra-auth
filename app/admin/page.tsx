@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import QRCode from "qrcode";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -17,6 +18,7 @@ export default function AdminPage() {
   const [deleteId, setDeleteId] = useState("");
 
   const [searchId, setSearchId] = useState("");
+  const [lastCreatedId, setLastCreatedId] = useState("");
 
   const [form, setForm] = useState({
     certificate_id: "",
@@ -117,6 +119,8 @@ if (files.length === 0) {
 
     alert("Certificate Created");
 
+setLastCreatedId(form.certificate_id);
+
     window.open(
       `/cert/${form.certificate_id}`,
       "_blank"
@@ -182,7 +186,25 @@ if (files.length === 0) {
       "_blank"
     );
   }
+async function downloadQR() {
 
+  if (!lastCreatedId) {
+    alert("Create certificate first");
+    return;
+  }
+
+  const url =
+    `https://vraverify.com/cert/${lastCreatedId}`;
+
+  const qrImage = await QRCode.toDataURL(url);
+
+  const link = document.createElement("a");
+
+  link.href = qrImage;
+  link.download = `${lastCreatedId}.png`;
+
+  link.click();
+}
   return (
     <main className="min-h-screen bg-black text-white px-6 py-20">
 
@@ -191,7 +213,9 @@ if (files.length === 0) {
         <h1 className="text-5xl font-bold mb-14">
           VRA ADMIN
         </h1>
-
+<p className="text-red-500">
+  LAST ID: {lastCreatedId}
+</p>
         {/* SEARCH */}
         <div className="mb-16 border border-zinc-800 rounded-3xl p-6 bg-zinc-950">
 
@@ -347,6 +371,14 @@ if (files.length === 0) {
           </button>
 
         </div>
+{lastCreatedId && (
+  <button
+    onClick={downloadQR}
+    className="w-full bg-green-600 text-white rounded-2xl py-5 text-xl font-semibold"
+  >
+    Download QR
+  </button>
+)}
 
         {/* DELETE */}
         <div className="mt-20 border-t border-zinc-800 pt-12">
