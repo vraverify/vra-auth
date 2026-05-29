@@ -121,10 +121,11 @@ if (files.length === 0) {
 
 setLastCreatedId(form.certificate_id);
 
-    window.open(
-      `/cert/${form.certificate_id}`,
-      "_blank"
-    );
+  alert("Certificate Created");
+
+setLastCreatedId(form.certificate_id);
+
+generateCertificateId();
 
     generateCertificateId();
   }
