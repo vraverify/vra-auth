@@ -99,6 +99,7 @@ if (files.length === 0) {
     setLoading(true);
 
     const uploadedImages = await uploadImages();
+    const createdId = form.certificate_id;
 
     const { error } = await supabase
       .from("certificates")
@@ -117,18 +118,12 @@ if (files.length === 0) {
       return;
     }
 
-    alert("Certificate Created");
+ alert("Certificate Created");
 
-setLastCreatedId(form.certificate_id);
-
-  alert("Certificate Created");
-
-setLastCreatedId(form.certificate_id);
+setLastCreatedId(createdId);
 
 generateCertificateId();
-
-    generateCertificateId();
-  }
+ }
 
   async function deleteCertificate() {
 
