@@ -24,7 +24,7 @@ export default function AdminPage() {
     brand: "",
     size: "",
     condition: "",
-    verified_at: "",
+    verified_at: new Date().toISOString().split("T")[0],
     inspector: "",
     status: "",
     notes: "",
@@ -85,7 +85,15 @@ export default function AdminPage() {
   }
 
   async function createCertificate() {
+if (!form.status) {
+  alert("Please select status");
+  return;
+}
 
+if (files.length === 0) {
+  alert("Upload at least 1 image");
+  return;
+}
     setLoading(true);
 
     const uploadedImages = await uploadImages();
@@ -281,11 +289,11 @@ export default function AdminPage() {
             </option>
 
             <option value="AUTHENTIC">
-              AUTHENTIC
+              PASS
             </option>
 
             <option value="FAKE">
-              FAKE
+              NOT PASS
             </option>
 
             <option value="UNVERIFIED">
@@ -302,17 +310,6 @@ export default function AdminPage() {
               setForm({
                 ...form,
                 notes: e.target.value,
-              })
-            }
-          />
-
-          <input
-            placeholder="Verified Date"
-            className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl px-6 py-5"
-            onChange={(e) =>
-              setForm({
-                ...form,
-                verified_at: e.target.value,
               })
             }
           />
