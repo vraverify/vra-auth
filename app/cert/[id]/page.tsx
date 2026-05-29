@@ -154,14 +154,14 @@ export default async function CertificatePage({
               </p>
 
               <span
-                className={
-                  cert.status === "AUTHENTIC"
-                    ? "text-green-400 font-semibold text-sm md:text-base"
-                    : cert.status === "FAKE"
-                    ? "text-red-500 font-semibold text-sm md:text-base"
-                    : "text-yellow-400 font-semibold text-sm md:text-base"
-                }
-              >
+  className={
+    cert.status === "AUTHENTIC"
+      ? "text-green-400 font-bold text-lg md:text-2xl"
+      : cert.status === "FAKE"
+      ? "text-red-500 font-bold text-lg md:text-2xl"
+      : "text-yellow-400 font-bold text-lg md:text-2xl"
+  }
+>
                 {cert.status === "AUTHENTIC"
                   ? "PASS"
                   : cert.status === "FAKE"
