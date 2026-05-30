@@ -19,6 +19,22 @@ export default function HomePage() {
     <main className="min-h-screen bg-black text-white flex items-center justify-center px-6 overflow-hidden">
       <div className="text-center max-w-7xl">
 
+        <div className="absolute top-8 right-8 flex gap-8 text-sm">
+
+  <a href="/about">
+    About
+  </a>
+
+  <a href="/process">
+    Process
+  </a>
+
+  <a href="/contact">
+    Contact
+  </a>
+
+</div>
+
         {/* LOGO */}
         <div className="flex justify-center mb-10">
           <Image
