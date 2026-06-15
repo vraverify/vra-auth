@@ -10,7 +10,7 @@ export default function ContactPage() {
         <div className="space-y-6 text-lg">
 
           <p>
-            Email: info@vraverify.com
+            Email: vra.verify@gmail.com
           </p>
 
           <p>
