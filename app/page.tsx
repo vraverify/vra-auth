@@ -42,7 +42,7 @@ export default function HomePage() {
             alt="VRA Logo"
             width={420}
             height={420}
-            className="object-contain opacity-95 w-[220px] md:w-[420px]"
+            className="object-contain opacity-95 w-[300px] md:w-[550px]"
             priority
           />
         </div>
