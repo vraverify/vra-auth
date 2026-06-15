@@ -48,7 +48,7 @@ export default function HomePage() {
         </div>
 
         {/* TITLE */}
-        <h1 className="text-4xl md:text-[140px] font-bold leading-[0.9] tracking-tight text-center">
+        <h1 className="text-2xl md:text-[140px] font-bold leading-[0.9] tracking-tight text-center">
           Luxury
           <br />
           Authentication
@@ -67,7 +67,7 @@ export default function HomePage() {
 
   <button
     onClick={handleSearch}
-    className="bg-white text-black px-10 py-5 rounded-full text-xl font-semibold hover:scale-105 transition duration-300"
+    className="bg-white text-black px-4 py-2 rounded-full text-xl font-semibold hover:scale-105 transition duration-300"
   >
     Search Certificate
   </button>
